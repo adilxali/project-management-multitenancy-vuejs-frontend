@@ -1,0 +1,22 @@
+import './assets/main.css'
+
+import { createApp } from 'vue'
+import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
+import { PiniaColada } from '@pinia/colada'
+import App from './App.vue'
+import router from './router'
+
+const app = createApp(App)
+
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
+app.use(pinia)
+app.use(PiniaColada, {
+  queryOptions: {
+    gcTime: 300_000,
+  },
+})
+app.use(router)
+
+app.mount('#app')
